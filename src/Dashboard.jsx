@@ -2,10 +2,12 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 function Dashboard() {
     const [closeOpen, setCloseOpen] = useState(true);
-    const [activeNavItem, setActiveNavItem] = useState("Home"); // Initialize with the default active navigation item
+    const [activeNavItem, setActiveNavItem] = useState("Home");
+    const { role } = useSelector((state) => state.auth);
     const navigate = useNavigate();
     let [show, setShow] = useState("");
     const handleNavItemClick = (itemName) => {
@@ -93,51 +95,55 @@ function Dashboard() {
                                         id="navbarNav"
                                     >
                                         <ul className="navbar-nav">
-                                            <li
-                                                className={`nav-item list_nav ${activeNavItem === "instructor" ? "active" : ""
-                                                    }`}
-                                            >
-                                                <Link className="nav-link" to={"instructor"}>
-                                                    Instructor
-                                                </Link>
-                                            </li>
-                                            <li
-                                                className={`nav-item list_nav ${activeNavItem === "courses" ? "active" : ""
-                                                    }`}
-                                            >
-                                                <Link
-                                                    className="nav-link"
-                                                    to="courses"
-                                                    onClick={() => handleItemClick("courses")}
-                                                >
-                                                    Courses
-                                                </Link>
-                                            </li>
-
-                                            {/* <li
-                                                className={`nav-item list_nav ${activeNavItem === "lecture" ? "active" : ""
-                                                    }`}
-                                            >
-                                                <Link
-                                                    className="nav-link"
-                                                    to="/lecture"
-                                                    onClick={() => handleItemClick("lecture")}
-                                                >
-                                                    Create Lecture
-                                                </Link>
-                                            </li> */}
-                                            <li
-                                                className={`nav-item list_nav ${activeNavItem === "assignLecture" ? "active" : ""
-                                                    }`}
-                                            >
-                                                <Link
-                                                    className="nav-link"
-                                                    to="assignLecture  "
-                                                    onClick={() => handleItemClick("assignLecture")}
-                                                >
-                                                    Schedule Lecture
-                                                </Link>
-                                            </li>
+                                            {
+                                                role === "admin" ? (
+                                                    <>    <li
+                                                        className={`nav-item list_nav ${activeNavItem === "instructor" ? "active" : ""
+                                                            }`}
+                                                    >
+                                                        <Link className="nav-link" to={"instructor"}>
+                                                            Instructor
+                                                        </Link>
+                                                    </li>
+                                                        <li
+                                                            className={`nav-item list_nav ${activeNavItem === "courses" ? "active" : ""
+                                                                }`}
+                                                        >
+                                                            <Link
+                                                                className="nav-link"
+                                                                to="courses"
+                                                                onClick={() => handleItemClick("courses")}
+                                                            >
+                                                                Courses
+                                                            </Link>
+                                                        </li><li
+                                                            className={`nav-item list_nav ${activeNavItem === "assignLecture" ? "active" : ""
+                                                                }`}
+                                                        >
+                                                            <Link
+                                                                className="nav-link"
+                                                                to="assignLecture  "
+                                                                onClick={() => handleItemClick("assignLecture")}
+                                                            >
+                                                                Schedule Lecture
+                                                            </Link>
+                                                        </li>
+                                                    </>
+                                                ) : (
+                                                    <li
+                                                        className={`nav-item list_nav ${activeNavItem === "assignLecture" ? "active" : ""
+                                                            }`}
+                                                    >
+                                                        <Link
+                                                            className="nav-link"
+                                                            to="assignLecture  "
+                                                            onClick={() => handleItemClick("assignLecture")}
+                                                        >
+                                                            Schedule Lecture
+                                                        </Link>
+                                                    </li>
+                                                )
+                                            }
                                             <li
                                                 className={`nav-item list_nav ${activeNavItem === "logout" ? "active" : ""
                                                     }`}

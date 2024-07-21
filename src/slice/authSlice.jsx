@@ -49,6 +49,7 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.message = "";
         state.success = false;
+        state.role = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         console.log("login fulfilled", action.payload);
@@ -58,11 +59,11 @@ const authSlice = createSlice({
         // state.token = action.payload.data.data.token
         sessionStorage.setItem("userToken", action.payload.data.data.token);
         sessionStorage.setItem("status", action.payload.data.data.status);
+        sessionStorage.setItem("role", action.payload.data.data.userData.role)
         // Update state with new token and status
         state.token = action.payload.data.data.token;
         state.status = action.payload.data.data.status;
-        console.log("token...........", state.token);
-        console.log("status.........", state.status);
+        state.role = action.payload.data.data.userData.role;
         console.log(token);
         toast.success(state.message, {
           autoClose: 3000,

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../slice/authSlice";
 import loginimg from "../../assets/images/loginimg.png";
 import { toast } from "react-toastify";
@@ -12,7 +12,6 @@ function SignIn() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setLogin((prev) => ({
       ...prev,
       [name]: value,
@@ -20,25 +19,35 @@ function SignIn() {
   };
 
   const handleLoginSubmit = async (e) => {
-    // write your code here
     e.preventDefault();
     try {
       const res = await dispatch(loginUser(login));
       console.log("login response component", res);
+
       if (res?.payload?.data?.data?.success === true) {
-        setLogin({});
-        navigate("/admin/instructor");
+        // Assuming the role is returned in the response payload
+        const userRole = res?.payload?.data?.data?.userData.role;
+        console.log("userRole", userRole);
+        if (userRole === "admin") {
+          navigate("/admin/instructor");
+        } else if (userRole === "user") {
+          navigate("/instructor/assignLecture");
+        } else {
+          navigate("/login"); // Default redirection if no specific role
+        }
         return;
       } else {
-        setLogin({});
-        return;
+        toast.error("Login failed. Please check your credentials.", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.message,{
+      toast.error(error.message, {
         position: "bottom-right",
         autoClose: 3000,
-      })
+      });
     }
   };
 
@@ -57,9 +66,8 @@ function SignIn() {
                 <div className="row">
                   <div className="col-md-12">
                     <div className="input_box">
-                      {" "}
                       <div className="form-group">
-                        <label> Email </label>
+                        <label>Email</label>
                         <input
                           type="email"
                           name="email"
@@ -72,9 +80,8 @@ function SignIn() {
                   </div>
                   <div className="col-md-12">
                     <div className="input_box">
-                      {" "}
                       <div className="form-group">
-                        <label> Password </label>
+                        <label>Password</label>
                         <input
                           type="password"
                           name="password"
@@ -87,10 +94,7 @@ function SignIn() {
                   </div>
                   <div className="col-md-12">
                     <div className="input_box">
-                      <button
-                        className="btn btn-outline-success "
-                        type="submit"
-                      >
+                      <button className="btn btn-outline-success" type="submit">
                         Login
                       </button>
                     </div>
