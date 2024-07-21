@@ -30,7 +30,7 @@ const authSlice = createSlice({
     isLoading: false,
     isTogglePassword: false,
     token: sessionStorage.getItem("userToken") || null,
-    success: false,
+    success: sessionStorage.getItem("success") || null,
     status: sessionStorage.getItem("status") || null,
     role: sessionStorage.getItem("role") || null,
     message: "",
@@ -61,6 +61,7 @@ const authSlice = createSlice({
         sessionStorage.setItem("userToken", action.payload.data.data.token);
         sessionStorage.setItem("status", action.payload.data.data.status);
         sessionStorage.setItem("role", action.payload.data.data.userData.role)
+        sessionStorage.setItem("success", action.payload.data.data.success)
         // Update state with new token and status
         state.token = action.payload.data.data.token;
         state.status = action.payload.data.data.status;
