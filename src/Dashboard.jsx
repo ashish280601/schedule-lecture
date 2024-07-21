@@ -97,7 +97,7 @@ function Dashboard() {
                                                 className={`nav-item list_nav ${activeNavItem === "instructor" ? "active" : ""
                                                     }`}
                                             >
-                                                <Link className="nav-link" to={"/instructor"}>
+                                                <Link className="nav-link" to={"instructor"}>
                                                     Instructor
                                                 </Link>
                                             </li>
@@ -107,14 +107,14 @@ function Dashboard() {
                                             >
                                                 <Link
                                                     className="nav-link"
-                                                    to="/courses"
+                                                    to="courses"
                                                     onClick={() => handleItemClick("courses")}
                                                 >
                                                     Courses
                                                 </Link>
                                             </li>
 
-                                            <li
+                                            {/* <li
                                                 className={`nav-item list_nav ${activeNavItem === "lecture" ? "active" : ""
                                                     }`}
                                             >
@@ -125,14 +125,14 @@ function Dashboard() {
                                                 >
                                                     Create Lecture
                                                 </Link>
-                                            </li>
+                                            </li> */}
                                             <li
                                                 className={`nav-item list_nav ${activeNavItem === "assignLecture" ? "active" : ""
                                                     }`}
                                             >
                                                 <Link
                                                     className="nav-link"
-                                                    to="/assignLecture  "
+                                                    to="assignLecture  "
                                                     onClick={() => handleItemClick("assignLecture")}
                                                 >
                                                     Schedule Lecture

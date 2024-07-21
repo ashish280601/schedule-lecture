@@ -27,7 +27,7 @@ function SignIn() {
       console.log("login response component", res);
       if (res?.payload?.data?.data?.success === true) {
         setLogin({});
-        navigate("/");
+        navigate("/admin/instructor");
         return;
       } else {
         setLogin({});
