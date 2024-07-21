@@ -106,7 +106,7 @@ const instructorSlice = createSlice({
         console.log("add instructor rejected payload", action.payload);
         state.isLoading = false;
         state.success = false;
-        state.message = action.payload ? action.payload.data.data.message : "Unknown error occurred";
+        state.message = action.payload ? action.payload.data.message : "Unknown error occurred";
         toast.error(state.message,{
           autoClose: 3000,
           position: "bottom-right"

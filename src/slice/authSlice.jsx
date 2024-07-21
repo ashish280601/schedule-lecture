@@ -32,6 +32,7 @@ const authSlice = createSlice({
     token: sessionStorage.getItem("userToken") || null,
     success: false,
     status: sessionStorage.getItem("status") || null,
+    role: sessionStorage.getItem("role") || null,
     message: "",
   },
   reducers: {
@@ -65,6 +66,7 @@ const authSlice = createSlice({
         state.status = action.payload.data.data.status;
         state.role = action.payload.data.data.userData.role;
         console.log(token);
+        console.log("Stste role......",state.role);
         toast.success(state.message, {
           autoClose: 3000,
           position: "bottom-right"
