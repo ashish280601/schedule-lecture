@@ -3,6 +3,7 @@ import SignIn from "../components/auth/signIn";
 import Dashboard from "../Dashboard";
 import { useSelector } from "react-redux";
 import Instructors from "../components/instructors/Instructors";
+import Courses from "../components/courses/Courses";
 
 const RouteConfig = () => {
     const { status } = useSelector((state) => state.auth);
@@ -14,10 +15,7 @@ const RouteConfig = () => {
             <Route path="/login" element={<SignIn />} />
             <Route path="/" element={isAuth ? <Dashboard /> : <Navigate to="/login" />}>
                 <Route path="instructor" element={<Instructors />} />
-                {/* <Route path="student" element={<Students />} />
-        <Route path="company" element={<Company />} />
-        <Route path="interview" element={<Interview />} />
-        <Route path="interviewResult" element={<InterviewResults />} /> */}
+                 <Route path="courses" element={<Courses />} />
             </Route>
         </Routes>   
     );

@@ -53,7 +53,7 @@ function Dashboard() {
                             <div className="navbar-box">
                                 <nav className="navbar navbar-expand-lg sticky-top fixed-top">
                                     <Link className="navbar-brand" to="#">
-                                        <img src={""} alt="" />
+                                        <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt1lLT0omtym12uURtx6Siv1zq6CUdTDLvtw&s"} alt="" />
                                     </Link>
                                     <button
                                         className="navbar-toggler navbar-toggle"
