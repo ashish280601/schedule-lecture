@@ -73,6 +73,7 @@ function ScheduleLecture() {
                 (inputData));
             console.log("res data from student component", res);
             if (res.payload.success) {
+                fetchScheduleData();
                 setInputData({});
                 return;
             }
